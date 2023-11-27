@@ -61,7 +61,6 @@ struct MemoryView: View {
                 )
                 .gesture(memorySwipe)
 #else
-            TextMemory(memory: 0.0, gesture: doubleTap, geometry: geometry)
             Text("\(memory)")
               .accessibility(identifier: "memoryDisplay")
               .padding(.horizontal, 5)
