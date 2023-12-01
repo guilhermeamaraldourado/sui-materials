@@ -32,14 +32,31 @@
 
 import SwiftUI
 
-struct WelcomeView: View {
+struct WelcomeBackgroundImage: View {
     var body: some View {
-        RegisterView()
+//        Image("welcome-background")
+//          .resizable()
+//          .aspectRatio(1 / 1, contentMode: .fill)
+//          .edgesIgnoringSafeArea(.all)
+//          .saturation(0.5)
+//          .blur(radius: 5)
+//          .opacity(0.08)
+        
+        //Esse ajuste foi necessário pq quando o teclado subia a imagem do fundo se movia.
+        GeometryReader { geometry in
+          Image("welcome-background")
+            .resizable()
+            .aspectRatio(1 / 1, contentMode: .fill)
+            // 2
+            .frame(width: geometry.size.width, alignment: .center)
+            .edgesIgnoringSafeArea(.all)
+            .saturation(0.5)
+            .blur(radius: 5)
+            .opacity(0.08)
+        }
     }
 }
 
-struct WelcomeView_Previews: PreviewProvider {
-    static var previews: some View {
-        WelcomeView()
-    }
+#Preview {
+    WelcomeBackgroundImage()
 }

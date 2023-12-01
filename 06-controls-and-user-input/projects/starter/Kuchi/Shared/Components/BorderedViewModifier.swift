@@ -32,14 +32,51 @@
 
 import SwiftUI
 
-struct WelcomeView: View {
-    var body: some View {
-        RegisterView()
+struct BorderedViewModifier: ViewModifier {
+    func body(content: Content) -> some View {
+      content
+            .padding(
+              EdgeInsets(top: 8, leading: 16, bottom: 8, trailing: 16))
+            .background(Color.white)
+            .overlay(
+              RoundedRectangle(cornerRadius: 8)
+                .stroke(lineWidth: 2)
+                .foregroundColor(.blue)
+            )
+            .shadow(
+              color: Color.gray.opacity(0.4),
+              radius: 3, x: 1, y: 2)
+
     }
 }
 
-struct WelcomeView_Previews: PreviewProvider {
-    static var previews: some View {
-        WelcomeView()
-    }
+extension View {
+  func bordered() -> some View {
+    ModifiedContent(
+      content: self,
+      modifier: BorderedViewModifier()
+    )
+  }
 }
+
+
+/*
+ struct KuchiTextStyle: TextFieldStyle {
+   public func _body(
+     configuration: TextField<Self._Label>) -> some View {
+       return configuration
+             .padding(
+               EdgeInsets(
+                 top: 8, leading: 16, bottom: 8, trailing: 16))
+             .background(Color.white)
+             .overlay(
+               RoundedRectangle(cornerRadius: 8)
+                 .stroke(lineWidth: 2)
+                 .foregroundColor(.blue)
+             )
+             .shadow(
+               color: Color.gray.opacity(0.4),
+               radius: 3, x: 1, y: 2)
+   }
+ }
+ */
